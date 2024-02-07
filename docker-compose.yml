@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  frontend:
+    container_name: 'twoge'
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - SQLALCHEMY_DATABASE_URI=postgresql://twoge:twoge@twoge-db:5432/twoge
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: 'postgres'
+    container_name: 'twoge-db'
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=twoge
+      - POSTGRES_PASSWORD=twoge
+      - POSTGRES_DB=twoge
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-q', '-d', 'movie_database', '-U', 'steve']
+      timeout: 20s
+      retries: 10

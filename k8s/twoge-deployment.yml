@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+
+kind: Deployment
+metadata:
+  name: twoge
+  labels:
+    app: twoge-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: twoge
+  template:
+    metadata:
+      labels:
+        app: twoge
+    spec:
+      containers:
+        - name: twoge-frontend
+          image: slamoureux/twoge:latest
+          env:
+            - name: SQLALCHEMY_DATABASE_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: twoge-config-map
+                  key: database_url
+          ports:
+            - containerPort: 80
