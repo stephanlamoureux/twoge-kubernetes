@@ -1,0 +1,11 @@
+apiVersion: v1
+
+kind: ConfigMap
+metadata:
+  name: twoge-config-map
+  namespace: steve
+data:
+  DB_USER: "twoge"
+  DB_HOST: "twoge-db"
+  DB_PORT: "5432"
+  DB_NAME: "twoge"

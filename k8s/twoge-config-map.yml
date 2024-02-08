@@ -1,7 +1,0 @@
-apiVersion: v1
-
-kind: ConfigMap
-metadata:
-  name: twoge-config-map
-data:
-  database_url: "postgresql://twoge:twoge@twoge-db:5432/twoge"
