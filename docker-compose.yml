@@ -6,8 +6,8 @@ services:
     build: .
     ports:
       - "8080:80"
-    environment:
-      - SQLALCHEMY_DATABASE_URI=postgresql://twoge:twoge@twoge-db:5432/twoge
+    networks:
+    - twoge-network
     depends_on:
       database:
         condition: service_healthy
@@ -17,11 +17,23 @@ services:
     container_name: 'twoge-db'
     ports:
       - '5432:5432'
+    networks:
+    - twoge-network
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=twoge
-      - POSTGRES_PASSWORD=twoge
-      - POSTGRES_DB=twoge
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    env_file: .env
     healthcheck:
       test: ['CMD', 'pg_isready', '-q', '-d', 'movie_database', '-U', 'steve']
       timeout: 20s
       retries: 10
+
+networks:
+  twoge-network:
+    driver: bridge
+
+volumes:
+  postgres-data:

@@ -8,8 +8,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("SQLALCHEMY_DATABASE_URI")
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+DATABASE_TYPE = os.environ.get('DB_TYPE')
+USERNAME = os.environ.get('DB_USER')
+PASSWORD = os.environ.get('DB_PASSWORD')
+HOSTNAME = os.environ.get('DB_HOST')
+PORT = int(os.environ.get('DB_PORT'))
+DATABASE_NAME = os.environ.get('DB_NAME')
+app.config['SQLALCHEMY_DATABASE_URI'] = f'{DATABASE_TYPE}://{USERNAME}:{PASSWORD}@{HOSTNAME}:{PORT}/{DATABASE_NAME}'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
