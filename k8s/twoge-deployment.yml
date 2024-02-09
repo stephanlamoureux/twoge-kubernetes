@@ -18,6 +18,13 @@ spec:
       containers:
       - name: twoge-frontend
         image: slamoureux/twoge:latest
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "100m"
+          limits:
+            memory: "200Mi"
+            cpu: "200m"
         env:
         - name: DB_USER
           valueFrom:
@@ -27,7 +34,7 @@ spec:
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: postgres-secrets
+              name: twoge-secrets
               key: DB_PASSWORD
         - name: DB_HOST
           valueFrom:
@@ -39,10 +46,19 @@ spec:
             configMapKeyRef:
               name: twoge-config-map
               key: DB_PORT
-        - name: DB_DATABASE
+        - name: DB_NAME
           valueFrom:
             configMapKeyRef:
               name: twoge-config-map
-              key: DB_DATABASE
+              key: DB_NAME
         ports:
         - containerPort: 80
+        readinessProbe: # readiness Checks if the pod is ready to serve traffic.
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5 # how many seconds to wait to start the probe after the container starts.
+          periodSeconds: 10 # how often to perform the probe.
+          timeoutSeconds: 2 # the number of seconds after which the probe times out.
+          successThreshold: 1 # The minimum consecutive successes for the probe to be considered successful after having failed.
+          failureThreshold: 3 # How many times to retry the probe before giving up.
