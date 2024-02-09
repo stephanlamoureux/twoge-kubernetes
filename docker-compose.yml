@@ -27,7 +27,7 @@ services:
       - POSTGRES_DB=${DB_NAME}
     env_file: .env
     healthcheck:
-      test: ['CMD', 'pg_isready', '-q', '-d', 'movie_database', '-U', 'steve']
+      test: ['CMD', 'pg_isready', '-q', '-d', 'twoge', '-U', 'twoge']
       timeout: 20s
       retries: 10
 
