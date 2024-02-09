@@ -34,6 +34,8 @@ spec:
             secretKeyRef:
               name: postgres-secrets
               key: postgres-database
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
         resources:
           requests:
             memory: "500Mi"
@@ -71,6 +73,6 @@ spec:
         - name: twoge-postgres-volume
           mountPath: /var/lib/postgresql/data
       volumes:
-      - name: twoge-postgres-volume
-        persistentVolumeClaim:
-          claimName: postgres-claim
+        - name: twoge-postgres-volume
+          persistentVolumeClaim:
+            claimName: postgres-claim
