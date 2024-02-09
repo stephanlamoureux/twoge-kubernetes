@@ -67,3 +67,10 @@ spec:
           timeoutSeconds: 5 # the number of seconds after which the probe times out.
           successThreshold: 1  # The minimum consecutive successes for the probe to be considered successful after having failed.
           failureThreshold: 3  # How many times to retry the probe before giving up.
+        volumeMounts:
+        - name: twoge-postgres-volume
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: twoge-postgres-volume
+        persistentVolumeClaim:
+          claimName: postgres-claim
