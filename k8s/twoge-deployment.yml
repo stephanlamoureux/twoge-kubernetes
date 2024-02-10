@@ -51,6 +51,11 @@ spec:
             configMapKeyRef:
               name: twoge-config-map
               key: DB_NAME
+        - name: DATABASE_TYPE
+          valueFrom:
+            configMapKeyRef:
+              name: twoge-config-map
+              key: DB_TYPE
         ports:
         - containerPort: 80
         readinessProbe: # readiness Checks if the pod is ready to serve traffic.
