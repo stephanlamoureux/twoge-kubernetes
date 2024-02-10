@@ -5,7 +5,7 @@ metadata:
  namespace: steve
 spec:
  accessModes:
-   - ReadWriteOnce
+   - ReadWriteOnce # only one pod on a single node can mount the volume and perform read-write operations at any given time.
  volumeMode: Filesystem
  resources:
    requests:
