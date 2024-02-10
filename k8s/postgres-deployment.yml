@@ -35,14 +35,14 @@ spec:
               name: postgres-secrets
               key: postgres-database
         - name: PGDATA
-          value: /var/lib/postgresql/data/pgdata
+          value: /var/lib/postgresql_custom/data/pgdata
         resources:
           requests:
             memory: "500Mi"
-            cpu: "500m"
+            cpu: "250m"
           limits:
             memory: "1Gi"
-            cpu: "1000m"
+            cpu: "500m"
         startupProbe: # Ensures that the application has enough time to start up before the liveness or readiness checks start.
           exec:
             command:
@@ -71,7 +71,7 @@ spec:
           failureThreshold: 3  # How many times to retry the probe before giving up.
         volumeMounts:
         - name: twoge-postgres-volume
-          mountPath: /var/lib/postgresql/data
+          mountPath: /var/lib/postgresql_custom/data/
       volumes:
         - name: twoge-postgres-volume
           persistentVolumeClaim:
