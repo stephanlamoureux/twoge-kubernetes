@@ -51,7 +51,7 @@ spec:
             configMapKeyRef:
               name: twoge-config-map
               key: DB_NAME
-        - name: DATABASE_TYPE
+        - name: DB_TYPE
           valueFrom:
             configMapKeyRef:
               name: twoge-config-map
