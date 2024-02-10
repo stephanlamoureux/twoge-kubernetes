@@ -1,11 +1,24 @@
 # Twoge
 
-```sh
-kubectl apply -f .
-```
+after ssh'ing into the EC2 instance, set up namespace:
 
 ```sh
-minikube service twoge-service --url -n steve
+sudo -u steve bash
+cd steve
+export KUBECONFIG=config.yml
+kubectl config set-context --current --namespace=steve
+```
+
+Apply all files:
+
+```sh
+kubectl apply -f twoge-kubernetes/k8s
+```
+
+Get the DNS address for the app. Copy the external IP from the LoadBalancer service:
+
+```sh
+kubectl get all -n steve
 ```
 
 To see the readiness probe in action:
@@ -14,16 +27,8 @@ To see the readiness probe in action:
 kubectl get logs <pod-name> -n steve
 ```
 
-Test data persistence:
-
-Create a post on twoge, and then delete the pods:
+Delete everything in the namespace:
 
 ```sh
-kubectl delete pods <pod 1> <pod 1> -n steve
-```
-
-delete everything in the namespace:
-
-```sh
- kubectl delete --all -f . -n steve
+ kubectl delete --all -f twoge-kubernetes/k8s -n steve
  ```
