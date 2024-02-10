@@ -21,3 +21,9 @@ Create a post on twoge, and then delete the pods:
 ```sh
 kubectl delete pods <pod 1> <pod 1> -n steve
 ```
+
+delete everything in the namespace:
+
+```sh
+ kubectl delete --all -f . -n steve
+ ```
