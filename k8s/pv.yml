@@ -16,4 +16,4 @@ spec:
     namespace: steve
     name: postgres-claim
   hostPath:
-    path: /mnt/data/postgres
+    path: /home/steve/data/postgres
