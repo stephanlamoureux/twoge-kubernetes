@@ -1,0 +1,37 @@
+@startuml
+!theme vibrant
+
+cloud "GitHub" {
+    ["GitHub Action"] -down-> ["DockerHub: twoge:latest"] : **builds & pushes**
+}
+
+cloud "AWS EKS Cluster" {
+    package "Namespace: steve" {
+        frame "Twoge Flask App" {
+            ["twoge-deployment.yml"]
+            database "PostgreSQL" {
+                ["postgres-deployment.yml"]
+            }
+            ["twoge-deployment.yml"] --> ["postgres-deployment.yml"] : **uses**
+        }
+        frame "Services" {
+            ["twoge-service.yml"] --> ["twoge-deployment.yml"]
+            ["postgres-service.yml"] --> ["postgres-deployment.yml"]
+        }
+        frame "Storage" {
+            ["pv.yml"] --> ["pvc.yml"] : **binds**
+            ["pvc.yml"] --> ["postgres-deployment.yml"] : **mounts**
+        }
+        frame "Configuration & Secrets" {
+            ["twoge-configmap.yml"] --> ["twoge-deployment.yml"]
+            ["twoge-secrets.yml"] --> ["twoge-deployment.yml"]
+            ["postgres-secrets.yml"] --> ["postgres-deployment.yml"]
+        }
+        frame "Quotas" {
+            ["quota.yml"] -down-> ["Namespace: steve"] : **applies**
+        }
+    }
+}
+
+["GitHub Action"] .right.> ["AWS EKS Cluster"] : **deploys**
+@enduml
