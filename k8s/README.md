@@ -1,34 +1,37 @@
-# Twoge
+# CLI Commands
 
-after ssh'ing into the EC2 instance, set up namespace:
+Apply Manifests:
 
 ```sh
-sudo -u steve bash
-cd steve
-export KUBECONFIG=config.yml
-kubectl config set-context --current --namespace=steve
+kubectl apply -f . -n steve
 ```
 
-Apply all files:
+Launch a local server:
 
 ```sh
-kubectl apply -f twoge-kubernetes/k8s
-```
-
-Get the DNS address for the app. Copy the external IP from the LoadBalancer service:
-
-```sh
-kubectl get all -n steve
+minikube service twoge-service --url -n steve
 ```
 
 To see the readiness probe in action:
 
 ```sh
-kubectl get logs <pod-name> -n steve
+kubectl logs <pod-name> -n steve
+```
+
+Delete pods:
+
+```sh
+kubectl delete pods <pod 1> <pod 1> -n steve
 ```
 
 Delete everything in the namespace:
 
 ```sh
- kubectl delete --all -f twoge-kubernetes/k8s -n steve
+ kubectl delete --all -f . -n steve
  ```
+
+Get all of the data about the node including resources being used:
+
+```sh
+kubectl describe nodes
+```
