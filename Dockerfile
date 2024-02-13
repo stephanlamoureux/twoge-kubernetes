@@ -1,5 +1,5 @@
 # Use a specific version of the python:alpine image to ensure consistent builds
-FROM python:3.9-alpine
+FROM python:3.10-alpine
 
 # Install dependencies
 RUN apk update && \
