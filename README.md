@@ -25,6 +25,12 @@ Before you begin, ensure you have the following installed:
 - Minikube (for local testing)
 - GitHub account (for CI/CD)
 
+## Architecture Diagram
+
+Below is the architecture diagram for the Twoge Flask application deployment using Kubernetes on AWS EKS, illustrating how components interact within the cloud environment.
+
+![Twoge Deployment Architecture](twoge-diagram.png)
+
 ## Installation
 
 1. **Clone the Repository**
@@ -141,12 +147,6 @@ The project uses GitHub Actions for continuous integration and continuous deploy
 - **Secrets and Environment Variables**
 
   The workflow utilizes secrets for Docker and AWS credentials, ensuring secure access to external services without hardcoding sensitive information in the repository.
-
-## Architecture Diagram
-
-Below is the architecture diagram for the Twoge Flask application deployment using Kubernetes on AWS EKS, illustrating how components interact within the cloud environment.
-
-![Twoge Deployment Architecture](twoge-diagram.png)
 
 ## Monitoring and Management
 
