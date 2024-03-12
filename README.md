@@ -7,11 +7,11 @@ This project details the deployment process of a Flask application named Twoge o
 - [Twoge Flask App Deployment on Kubernetes](#twoge-flask-app-deployment-on-kubernetes)
 	- [Table of Contents](#table-of-contents)
 	- [Prerequisites](#prerequisites)
+ 	- [Architecture Diagram](#architecture-diagram)
 	- [Installation](#installation)
 	- [Configuration](#configuration)
 	- [Deployment](#deployment)
 	- [CI/CD with GitHub Actions](#cicd-with-github-actions)
-	- [Architecture Diagram](#architecture-diagram)
 	- [Monitoring and Management](#monitoring-and-management)
 
 ## Prerequisites
